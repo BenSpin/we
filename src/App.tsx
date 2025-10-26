@@ -39,8 +39,6 @@ interface Payload {
   respondent_name: string;
   email: string;
   party_names: string[];
-  wants_plus_one: boolean;
-  plus_one_name: string | null;
   share_address: boolean;
   address: Address | null;
   notes: string | null;
@@ -64,8 +62,6 @@ export default function WeddingRSVP(): JSX.Element {
   const [primaryName, setPrimaryName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [partyNames, setPartyNames] = useState<string[]>([""]);
-  const [wantsPlusOne, setWantsPlusOne] = useState<boolean>(false);
-  const [plusOneName, setPlusOneName] = useState<string>("");
   const [shareAddress, setShareAddress] = useState<boolean>(false);
   const [addr, setAddr] = useState<Address>({
     line1: "",
@@ -104,8 +100,6 @@ export default function WeddingRSVP(): JSX.Element {
     if (!attending) return "Please select if you're attending.";
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       return "Please enter a valid email (or leave it blank).";
-    if (wantsPlusOne && !plusOneName.trim())
-      return "Please enter your plus-one's name or uncheck plus-one.";
     if (shareAddress && !addr.line1.trim())
       return "Please provide at least Address line 1 if sharing your address.";
 
@@ -132,8 +126,6 @@ export default function WeddingRSVP(): JSX.Element {
       respondent_name: primaryName.trim(),
       email: email.trim(),
       party_names: partyNames.map((n) => n.trim()).filter(Boolean),
-      wants_plus_one: wantsPlusOne,
-      plus_one_name: plusOneName.trim() || null,
       share_address: shareAddress,
       address: shareAddress ? addr : null,
       notes: notes.trim() || null,
@@ -305,34 +297,6 @@ export default function WeddingRSVP(): JSX.Element {
                   </button>
                 </div>
               </div>
-
-              {/* Plus-one (now explicit so validation makes sense) */}
-              <div>
-                <label className="inline-flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    className="size-4"
-                    checked={wantsPlusOne}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setWantsPlusOne(e.target.checked)
-                    }
-                  />
-                  <span>I'm bringing a plus one</span>
-                </label>
-                {wantsPlusOne && (
-                  <div className="mt-3">
-                    <input
-                      className="w-full rounded-xl border px-3 py-2"
-                      placeholder="Plus-one full name"
-                      value={plusOneName}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setPlusOneName(e.target.value)
-                      }
-                    />
-                  </div>
-                )}
-              </div>
-
               <div>
                 <label className="inline-flex items-center gap-2">
                   <input
