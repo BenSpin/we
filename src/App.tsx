@@ -12,7 +12,7 @@ import confetti from "canvas-confetti";
 
 // === Endpoints ===
 const ENDPOINT_URL =
-  "https://script.google.com/macros/s/AKfycbxLCP9gPoRJ59EvY5POIhfiZTNDQbTIq74-CwhnV-Y_hDwMYKJn5MwSUe0qCiWBF8je/exec" as const;
+  "https://script.google.com/macros/s/AKfycbzlYikEiuwwHP-JnVJo7mIjVhhPFvdISkPD-Q3vVgEO2-RqY25jIP4qHw1hO8iACS5i/exec" as const;
 const GITHUB_ENDPOINT = "" as const;
 
 // === Security knobs ===
