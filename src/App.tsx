@@ -196,9 +196,9 @@ export default function WeddingRSVP(): JSX.Element {
       origin: { y: 0.6 },
     };
 
-    c({ ...defaults, particleCount: 50, scalar: 2 });
-    c({ ...defaults, particleCount: 25, scalar: 3 });
-    c({ ...defaults, particleCount: 10, scalar: 4 });
+    c({ ...defaults, particleCount: 50, scalar: 1 });
+    c({ ...defaults, particleCount: 25, scalar: 1.2 });
+    c({ ...defaults, particleCount: 10, scalar: 1.4 });
   };
 
 
