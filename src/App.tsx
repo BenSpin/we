@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { JSX } from "react";
-import confetti from "canvas-confetti";
+import confetti, { type Options as ConfettiOptions, type Shape } from "canvas-confetti";
 
 /**
  * Wedding RSVP — Google Sheets (Apps Script)
@@ -29,6 +29,7 @@ const PICKUP_ZONES = [
   "Waikiki Hilton Hawaiian Village",
   "Waimanalo Beach Cottages",
   "Kaneohe Paradise Bay Resort",
+  "Don't know yet / I'll do my own ride",
 ] as const;
 
 const HOME_TIMES = ["9:30 pm", "11 pm", "Midnight"] as const;
@@ -52,6 +53,7 @@ interface Payload {
   timestamp_iso: string;
   attending: Attending;
   respondent_name: string;
+
   email: string;
   party_names: string[];
   share_address: boolean;
@@ -180,17 +182,26 @@ export default function WeddingRSVP(): JSX.Element {
     }, 200);
   };
 
-  // AFTER YES: single random shoot burst
-  const randomShoot = () => {
+  // AFTER YES: heart burst
+    const randomShoot = () => {
     const c = getC();
-    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
-    c({
-      angle: randomInRange(55, 125),
-      spread: randomInRange(50, 70),
-      particleCount: Math.floor(randomInRange(80, 160)),
+
+    const defaults: ConfettiOptions = {
+      spread: 360,
+      ticks: 100,
+      gravity: 0,
+      decay: 0.94,
+      startVelocity: 30,
+      colors: ["#FFC0CB", "#FF69B4", "#FF1493", "#C71585"],
       origin: { y: 0.6 },
-    });
+    };
+
+    c({ ...defaults, particleCount: 50, scalar: 2 });
+    c({ ...defaults, particleCount: 25, scalar: 3 });
+    c({ ...defaults, particleCount: 10, scalar: 4 });
   };
+
+
 
   // NO: gentle snow/drizzle (white particles look best on dark theme)
   const gentleDrizzle = () => {
