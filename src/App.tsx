@@ -25,11 +25,11 @@ const HERO_IMAGE_URL =
 
 // === Transport options (EXACT strings) ===
 const PICKUP_ZONES = [
-  "Waikiki Zoo",
-  "Waikiki Hilton Hawaiian Village",
+  "Hyatt Place Waikiki Beach",
+  "Hilton Garden Inn Waikiki Beach",
   "Waimanalo Beach Cottages",
   "Kaneohe Paradise Bay Resort",
-  "Don't know yet / I'll do my own ride",
+  "I'll do my own ride"
 ] as const;
 
 const HOME_TIMES = ["9:30 pm", "11 pm", "Midnight"] as const;
